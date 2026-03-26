@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Information | Vacation Condiment Essentials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@800;900&family=Yellowtail&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#E1261C',
+                            black: '#1A1A1A',
+                            gray: '#B3B3B3',
+                            lightgray: '#F0F0F0'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        script: ['"Yellowtail"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --red: #E1261C;
+            --black: #1A1A1A;
+        }
+
+        .repeating-bg-text {
+            white-space: nowrap;
+            overflow: hidden;
+            color: #b3b3b3;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 10px 0;
+            background-color: white;
+            user-select: none;
+            position: relative;
+        }
+        .repeating-bg-text span {
+            display: inline-block;
+            animation: scrollText 60s linear infinite;
+        }
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #E1261C; }
+        ::-webkit-scrollbar-thumb:hover { background: #b91c13; }
+
+        /* Tab styles */
+        .tab-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 10px 14px;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            color: #666;
+            white-space: nowrap;
+            transition: all 0.2s;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+        .tab-btn:hover { color: var(--red); }
+        .tab-btn.active {
+            color: var(--red);
+            border-bottom: 3px solid var(--red);
+        }
+
+        /* Nutrition Facts Panel */
+        .nf-panel {
+            border: 2px solid #1A1A1A;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            max-width: 280px;
+            padding: 4px 6px;
+            font-size: 13px;
+        }
+        .nf-title {
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+        .nf-servings {
+            font-size: 10px;
+            font-weight: 400;
+            border-bottom: 8px solid #1A1A1A;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+        }
+        .nf-calories-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 4px solid #1A1A1A;
+            padding-bottom: 2px;
+        }
+        .nf-calories-label { font-size: 12px; font-weight: 700; }
+        .nf-calories-num { font-size: 40px; font-weight: 900; line-height: 1; }
+        .nf-dv-note { font-size: 9px; text-align: right; border-bottom: 1px solid #1A1A1A; padding-bottom: 2px; }
+        .nf-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            padding: 1px 0;
+            font-size: 11px;
+        }
+        .nf-row.thick { border-bottom: 4px solid #1A1A1A; }
+        .nf-row.sub { padding-left: 16px; }
+        .nf-row.sub2 { padding-left: 28px; }
+        .nf-bold { font-weight: 700; }
+        .nf-footer { font-size: 9px; margin-top: 4px; border-top: 1px solid #1A1A1A; padding-top: 3px; }
+
+        /* Product panel */
+        .product-panel { display: none; }
+        .product-panel.active { display: block; }
+
+        /* Tabs scroll on mobile */
+        .tabs-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .tabs-wrapper::-webkit-scrollbar { display: none; }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+        .badge-green { background: #d1fae5; color: #065f46; }
+        .badge-blue { background: #dbeafe; color: #1e40af; }
+        .badge-yellow { background: #fef3c7; color: #92400e; }
+        .badge-gray { background: #f3f4f6; color: #374151; }
+
+        .section-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .curve-bottom {
+            position: relative;
+            background: #1A1A1A;
+        }
+        .curve-bottom::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: #1A1A1A;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .advisory-box {
+            background: #fff8f0;
+            border-left: 4px solid #E1261C;
+            padding: 10px 14px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white antialiased text-brand-black flex flex-col min-h-screen">
+
+    <!-- Scrolling ticker -->
+    <div class="repeating-bg-text border-b-4 border-brand-gray flex">
+        <span>
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
+        </span>
+        <span>
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
+        </span>
+    </div>
+
+    <!-- Header -->
+    <header class="curve-bottom pt-12 pb-10 text-center relative z-20 overflow-visible">
+        <div class="container mx-auto px-4 relative z-20">
+            <p class="text-brand-gray text-xs font-bold tracking-widest uppercase mb-2">Product Information</p>
+            <h1 class="text-brand-red font-serif text-4xl md:text-6xl font-black tracking-widest uppercase drop-shadow-lg">Vacation</h1>
+            <div class="font-script text-white text-4xl md:text-6xl -mt-4 md:-mt-8 relative z-30 transform -rotate-3 drop-shadow-xl">Condiment</div>
+            <h1 class="text-brand-red font-serif text-4xl md:text-6xl font-black tracking-widest uppercase mt-[-10px] md:-mt-6 drop-shadow-lg">Essentials</h1>
+            <p class="text-gray-400 text-xs font-bold tracking-widest uppercase mt-4">SmartLabel™ Product Information Page</p>
+        </div>
+    </header>
+
+    <div class="h-20 md:h-28 bg-white"></div>
+
+    <!-- Intro Banner -->
+    <div class="bg-brand-lightgray border-y border-gray-200 py-4 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-3 text-xs text-gray-600 font-sans font-medium">
+            <svg class="w-5 h-5 text-brand-red flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>This page provides label information including <strong>ingredients, nutrition facts, allergens, and usage advisories</strong> for each product included in the Vacation Condiment Essentials package. Select a product tab below to view its details.</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-10 px-4 max-w-6xl mx-auto w-full">
+
+        <!-- Tab Navigation -->
+        <div class="tabs-wrapper border-b-2 border-gray-200 mb-8">
+            <div class="flex gap-0 min-w-max" id="tabBar">
+                <button class="tab-btn active" onclick="showTab('ketchup', this)">Hunt's Ketchup</button>
+                <button class="tab-btn" onclick="showTab('ymustard', this)">Yellow Mustard</button>
+                <button class="tab-btn" onclick="showTab('bmustard', this)">Brown Mustard</button>
+                <button class="tab-btn" onclick="showTab('ranch', this)">Ranch Dressing</button>
+                <button class="tab-btn" onclick="showTab('steak', this)">A.1. Steak Sauce</button>
+                <button class="tab-btn" onclick="showTab('bbq', this)">BBQ Sauce</button>
+                <button class="tab-btn" onclick="showTab('hot', this)">Hot Sauce</button>
+                <button class="tab-btn" onclick="showTab('mayo', this)">Mayonnaise</button>
+                <button class="tab-btn" onclick="showTab('seasoning', this)">Steak Seasoning</button>
+                <button class="tab-btn" onclick="showTab('pepper', this)">Black Pepper</button>
+                <button class="tab-btn" onclick="showTab('salt', this)">Salt</button>
+                <button class="tab-btn" onclick="showTab('oil', this)">Olive Oil</button>
+            </div>
+        </div>
+
+        <!-- ======================== HUNT'S KETCHUP ======================== -->
+        <div id="tab-ketchup" class="product-panel active">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Hunt's Tomato Ketchup</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">6.4 oz (181g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">No High Fructose Corn Syrup</span>
+                            <span class="badge badge-blue">Non-GMO</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Tomato concentrate made from red ripe tomatoes, distilled vinegar, high fructose corn syrup, corn syrup, salt, spice, onion powder, natural flavoring.</p>
+                        <div class="advisory-box mt-3">
+                            <strong>Allergen Information:</strong> Contains no major allergens. Manufactured in a facility that may also process wheat and soy products.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Best if used by date on bottom of bottle. Keep refrigerated for freshness.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Hunt's is a brand of ConAgra Brands. For more information visit <span class="text-brand-red font-semibold">huntsketchup.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 7 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>1 tbsp (17g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">20</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 160mg</span><span><b>7%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 5g</span><span><b>2%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 4g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 4g Added Sugars</span><span>8%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0.1mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 85mg</span><span>2%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== FRENCH'S YELLOW MUSTARD ======================== -->
+        <div id="tab-ymustard" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">French's Classic Yellow Mustard</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">2 oz (57g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">Fat Free</span>
+                            <span class="badge badge-green">Kosher</span>
+                            <span class="badge badge-blue">Non-GMO</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Distilled vinegar, water, #1 Grade mustard seed, salt, turmeric, paprika, spice, natural flavors and garlic powder.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Contains mustard. Free from major allergens including wheat/gluten, milk, eggs, fish, shellfish, tree nuts, peanuts, and soy.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Use within 12 months of opening. Best by date printed on cap.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">French's is a brand of McCormick & Company. For more information visit <span class="text-brand-red font-semibold">frenchs.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 11 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>1 tsp (5g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">0</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 55mg</span><span><b>2%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 0mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== GULDEN'S BROWN MUSTARD ======================== -->
+        <div id="tab-bmustard" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Gulden's Spicy Brown Mustard</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">1.9 oz (54g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">Fat Free</span>
+                            <span class="badge badge-green">Kosher</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Vinegar, mustard seed, water, salt, turmeric, spices.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Contains mustard seed. Free from wheat/gluten, milk, eggs, fish, shellfish, tree nuts, peanuts, and soy.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Best if used by date shown on cap. Excellent on sandwiches, hot dogs, pretzels, and grilled meats.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Gulden's is a brand of Conagra Brands. For more information visit <span class="text-brand-red font-semibold">guldens.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 11 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>1 tsp (5g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">5</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 60mg</span><span><b>3%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 10mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0.2mg</span><span>2%</span></div>
+                        <div class="nf-row"><span>Potassium 20mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== HIDDEN VALLEY RANCH ======================== -->
+        <div id="tab-ranch" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Hidden Valley Original Ranch Dressing</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">4.5 oz (128g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-yellow">Contains Eggs &amp; Milk</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Vegetable oil (soybean and/or canola), water, egg yolk, sugar, salt, cultured nonfat buttermilk, natural flavors (soy), less than 1%: spices, garlic (dried), onion (dried), vinegar, phosphoric acid, xanthan gum, modified food starch, monosodium glutamate, artificial flavors, disodium phosphate, sorbic acid and calcium disodium EDTA as preservatives.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Contains <strong>Egg, Milk, Soy</strong>. May contain traces of wheat. Not for those with severe nut allergies — manufactured in a shared facility.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Best by date on cap. Keep refrigerated. Do not freeze. Use within 30 days of opening.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Hidden Valley is a brand of Clorox. For more information visit <span class="text-brand-red font-semibold">hiddenvalley.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 9 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>2 tbsp (29g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">130</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 13g</span><span><b>17%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 2g</span><span>10%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row sub"><span>Polyunsaturated Fat 8g</span><span></span></div>
+                        <div class="nf-row sub"><span>Monounsaturated Fat 3g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 10mg</span><span><b>3%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 270mg</span><span><b>12%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 2g</span><span><b>1%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 1g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 1g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 20mg</span><span>2%</span></div>
+                        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 40mg</span><span>2%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== A.1. STEAK SAUCE ======================== -->
+        <div id="tab-steak" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">A.1. Original Steak Sauce</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">2 oz (57g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Fat Free</span>
+                            <span class="badge badge-green">Cholesterol Free</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Tomato purée (water, tomato paste), distilled vinegar, corn syrup, salt, crushed orange purée, dried garlic and onion, spice, celery seed, caramel color, potassium sorbate (to preserve freshness), xanthan gum.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Contains no major allergens. Free from gluten, milk, eggs, fish, shellfish, tree nuts, peanuts, soy, and wheat.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Use within 90 days of opening for best quality. Best if used by date on cap.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">A.1. is a brand of Kraft Heinz. For more information visit <span class="text-brand-red font-semibold">kraftheinz.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 8 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>1 tbsp (17g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">15</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 280mg</span><span><b>12%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 3g</span><span><b>1%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 3g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 3g Added Sugars</span><span>6%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0.1mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 90mg</span><span>2%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== SWEET BABY RAY'S BBQ ======================== -->
+        <div id="tab-bbq" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Sweet Baby Ray's Original BBQ Sauce</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">4.5 oz (128g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Fat Free</span>
+                            <span class="badge badge-green">Gluten Free</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">High fructose corn syrup, distilled vinegar, tomato paste, modified starch, salt, pineapple juice concentrate, natural smoke flavor, spice, caramel color, sodium benzoate (as preservative), molasses, garlic (dried), sugar, tamarind, natural flavor, celery seed.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Free from major allergens including wheat/gluten, milk, eggs, fish, shellfish, tree nuts, peanuts, and soy. Manufactured in a nut-free facility.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Best if used by date on label. Do not freeze. Use as a dipping sauce, glaze, or marinade.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Sweet Baby Ray's is a brand of Ken's Foods. For more information visit <span class="text-brand-red font-semibold">sweetbabyrays.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 9 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>2 tbsp (36g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">70</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 290mg</span><span><b>13%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 18g</span><span><b>7%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 15g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 14g Added Sugars</span><span>28%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 10mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0.3mg</span><span>2%</span></div>
+                        <div class="nf-row"><span>Potassium 90mg</span><span>2%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== CHOLULA HOT SAUCE ======================== -->
+        <div id="tab-hot" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Cholula Original Hot Sauce</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">2 oz (57g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">Vegan</span>
+                            <span class="badge badge-blue">Non-GMO Project Verified</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Water, peppers (arbol and piquin), salt, spices, vinegar, xanthan gum.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Free from all major allergens including wheat/gluten, milk, eggs, fish, shellfish, tree nuts, peanuts, soy, and sesame.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Shelf stable unopened. Best by date on bottle bottom. Contains árbol and piquin peppers — moderate heat level.</p>
+                        <div class="advisory-box">
+                            <strong>Advisory:</strong> Hot sauce. Individuals with gastric sensitivity, GERD, or ulcers should use with caution.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Cholula is a brand of McCormick & Company. For more information visit <span class="text-brand-red font-semibold">cholula.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 34 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>1 tsp (5g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">0</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 95mg</span><span><b>4%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 10mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== DUKE'S MAYO ======================== -->
+        <div id="tab-mayo" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Duke's Real Mayonnaise</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">3.2 oz (91g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-yellow">Contains Eggs &amp; Soy</span>
+                            <span class="badge badge-gray">No Added Sugar</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Soybean oil, eggs, water, distilled and cider vinegar, salt, oleoresin paprika, natural flavors, calcium disodium EDTA (used to protect quality).</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Contains <strong>Eggs, Soy</strong>. Free from wheat/gluten, milk, fish, shellfish, tree nuts, and peanuts.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Refrigerate after opening. Best by date printed on cap. Do not freeze. Once opened, use within 2 months. Keep refrigerated at all times after opening.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Duke's is a brand of Sauer Brands. For more information visit <span class="text-brand-red font-semibold">dukesmayo.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 6 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>1 tbsp (13g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">100</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 11g</span><span><b>14%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 1.5g</span><span>8%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row sub"><span>Polyunsaturated Fat 6g</span><span></span></div>
+                        <div class="nf-row sub"><span>Monounsaturated Fat 3g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 10mg</span><span><b>3%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 90mg</span><span><b>4%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 0mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== McCORMICK STEAK SEASONING ======================== -->
+        <div id="tab-seasoning" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">McCormick Montreal Steak Seasoning</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">1 oz (28g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">Non-GMO</span>
+                            <span class="badge badge-blue">No Artificial Colors or Flavors</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Salt, spices (including black pepper and red pepper), onion, garlic, sunflower oil, natural flavor.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Free from all major allergens including wheat/gluten, milk, eggs, fish, shellfish, tree nuts, peanuts, soy, and sesame.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Store in a cool, dry place. Keep container tightly closed. Avoid moisture. Best quality within 2 years of purchase. Excellent on steaks, burgers, chicken, and roasted vegetables.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">McCormick & Company, Inc. For more information visit <span class="text-brand-red font-semibold">mccormick.com</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 14 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>¼ tsp (0.7g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">0</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 160mg</span><span><b>7%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 5mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== BLACK PEPPER ======================== -->
+        <div id="tab-pepper" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Pure Ground Black Pepper</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">1.25 oz (35g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">Allergen Free</span>
+                            <span class="badge badge-green">Vegan</span>
+                            <span class="badge badge-blue">Non-GMO</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Black pepper.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Free from all major allergens. Single-ingredient spice.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Store in a cool, dry place. Keep tightly closed. Best quality within 2–3 years of purchase date. Use to season meats, vegetables, soups, eggs, and more.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Certifications</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge badge-green">Kosher</span>
+                            <span class="badge badge-blue">Non-GMO Verified</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 35 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>¼ tsp (1g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">0</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 10mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0.3mg</span><span>2%</span></div>
+                        <div class="nf-row"><span>Potassium 30mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== SALT ======================== -->
+        <div id="tab-salt" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Salt (Sodium Chloride)</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">4 oz (113g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">Allergen Free</span>
+                            <span class="badge badge-green">Vegan</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">Salt. May contain iodide, sodium silicoaluminate (anti-caking agent), dextrose.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Free from all major allergens.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Store in a cool, dry place. Avoid moisture. Unlimited shelf life when stored properly. Essential for cooking, seasoning, and preserving.</p>
+                        <div class="advisory-box mt-3">
+                            <strong>Dietary Advisory:</strong> Individuals on a sodium-restricted diet should monitor intake. Daily Value for sodium is 2,300mg per day.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Certifications</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge badge-green">Kosher</span>
+                            <span class="badge badge-green">Food Grade Certified</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 113 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>¼ tsp (1g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">0</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 590mg</span><span><b>26%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 0mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== EXTRA VIRGIN OLIVE OIL ======================== -->
+        <div id="tab-oil" class="product-panel">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-7">
+                    <div>
+                        <p class="section-header">Product Identity</p>
+                        <h2 class="font-serif text-3xl font-black text-brand-black">Extra Virgin Olive Oil</h2>
+                        <p class="text-sm text-gray-500 font-medium mt-1">2 oz (57g) — Single-Serve Portion</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="badge badge-green">Gluten Free</span>
+                            <span class="badge badge-green">Allergen Free</span>
+                            <span class="badge badge-green">Vegan</span>
+                            <span class="badge badge-blue">Cold Pressed</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Ingredients</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">100% Extra virgin olive oil.</p>
+                        <div class="advisory-box">
+                            <strong>Allergen Information:</strong> Free from all major allergens including wheat/gluten, milk, eggs, fish, shellfish, tree nuts, peanuts, soy, and sesame. Derived from olives — not a tree nut under FDA classification.
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Usage Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Store in a cool, dark place. Keep away from heat and direct sunlight. Best within 2 years of harvest date. Once opened, use within 18 months. Suitable for salads, sautéing, marinades, and finishing dishes.</p>
+                    </div>
+                    <div>
+                        <p class="section-header">Certifications</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="badge badge-green">USDA Organic (where applicable)</span>
+                            <span class="badge badge-blue">Non-GMO</span>
+                            <span class="badge badge-green">Kosher</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="section-header">Brand Information</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">Extra virgin olive oil sourced from premium olives. For more information about olive oil standards, visit <span class="text-brand-red font-semibold">oliveoilcouncil.org</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="section-header">Nutrition Facts</p>
+                    <div class="nf-panel">
+                        <div class="nf-title">Nutrition Facts</div>
+                        <div class="nf-servings">
+                            <div>About 4 servings per container</div>
+                            <div style="display:flex;justify-content:space-between;font-weight:700;font-size:12px;"><span>Serving size</span><span>1 tbsp (14g)</span></div>
+                        </div>
+                        <div style="font-size:10px;font-weight:700;">Amount Per Serving</div>
+                        <div class="nf-calories-row">
+                            <div class="nf-calories-label">Calories</div>
+                            <div class="nf-calories-num">120</div>
+                        </div>
+                        <div class="nf-dv-note">% Daily Value*</div>
+                        <div class="nf-row"><span><b>Total Fat</b> 14g</span><span><b>18%</b></span></div>
+                        <div class="nf-row sub"><span>Saturated Fat 2g</span><span>10%</span></div>
+                        <div class="nf-row sub"><span><i>Trans</i> Fat 0g</span><span></span></div>
+                        <div class="nf-row sub"><span>Polyunsaturated Fat 1.5g</span><span></span></div>
+                        <div class="nf-row sub"><span>Monounsaturated Fat 10g</span><span></span></div>
+                        <div class="nf-row"><span><b>Cholesterol</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Sodium</b> 0mg</span><span><b>0%</b></span></div>
+                        <div class="nf-row"><span><b>Total Carbohydrate</b> 0g</span><span><b>0%</b></span></div>
+                        <div class="nf-row sub"><span>Dietary Fiber 0g</span><span>0%</span></div>
+                        <div class="nf-row sub"><span>Total Sugars 0g</span><span></span></div>
+                        <div class="nf-row sub2"><span>Includes 0g Added Sugars</span><span>0%</span></div>
+                        <div class="nf-row thick"><span><b>Protein</b> 0g</span><span></span></div>
+                        <div class="nf-row"><span>Vitamin D 0mcg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Calcium 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Iron 0mg</span><span>0%</span></div>
+                        <div class="nf-row"><span>Potassium 0mg</span><span>0%</span></div>
+                        <div class="nf-footer">*The % Daily Value tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SmartLabel Disclaimer -->
+        <div class="mt-12 pt-8 border-t border-gray-200">
+            <p class="text-xs text-gray-400 font-sans leading-relaxed max-w-4xl">
+                <strong class="text-gray-500">Disclaimer:</strong> Product information presented on this page is sourced from the product manufacturers and is believed to be accurate at time of publication. Nutrition facts, ingredients, and allergen information are based on the specific package sizes included in the Vacation Condiment Essentials bundle. Always refer to the physical product label for the most current and complete information. Brand names and trademarks are the property of their respective owners. This page is intended as a SmartLabel™-style product information resource for consumers.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-center py-8 text-gray-500 text-sm font-sans">
+        <p class="mb-2 font-serif text-brand-red text-xl uppercase font-bold tracking-widest">Vacation <span class="font-script text-white text-2xl lowercase transform -rotate-2 inline-block -mx-1">Condiment</span> Essentials</p>
+        <p>&copy; 2026 Vacation Condiment Essentials. All rights reserved.</p>
+        <p class="mt-1">Brand names and logos are trademarks of their respective owners.</p>
+        <p class="mt-1 text-xs text-gray-600">Product Information Page — SmartLabel™ Reference</p>
+    </footer>
+
+    <script>
+        function showTab(tabId, btn) {
+            // Hide all panels
+            document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+            // Deactivate all tabs
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            // Show selected panel
+            document.getElementById('tab-' + tabId).classList.add('active');
+            // Activate clicked tab
+            btn.classList.add('active');
+            // Scroll tab into view on mobile
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    </script>
+</body>
+</html>

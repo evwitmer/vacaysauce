@@ -39,18 +39,16 @@
             padding: 10px 0;
             background-color: white;
             user-select: none;
-            position: relative;
         }
         .repeating-bg-text span {
             display: inline-block;
             animation: scrollText 60s linear infinite;
         }
         @keyframes scrollText {
-            0% { transform: translateX(0); }
+            0%   { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        /* Hero: same black curve as main site */
         .curve-bottom {
             position: relative;
             background: #1A1A1A;
@@ -67,7 +65,6 @@
             z-index: 10;
         }
 
-        /* Red section curve — same as main site's "what's inside" */
         .curve-top-red {
             position: relative;
             background: #E1261C;
@@ -85,83 +82,61 @@
             z-index: 10;
         }
 
-        /* Product cards */
-        .product-card {
+        /* Option card */
+        .option-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
+            border: 2px solid #e5e7eb;
             overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-            transition: transform 0.25s, box-shadow 0.25s;
             display: flex;
             flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.16);
+        .option-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.13);
+            border-color: #E1261C;
+        }
+        .option-card.best-value {
+            border-color: #E1261C;
+            box-shadow: 0 4px 24px rgba(225,38,28,0.15);
         }
 
-        /* Placeholder product image area */
-        .product-image-area {
-            width: 100%;
-            aspect-ratio: 4/3;
+        /* Product section divider */
+        .product-section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 64px;
+        }
+        .product-section-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-image-area.small-bg {
-            background: linear-gradient(140deg, #1A1A1A 0%, #2d2d2d 100%);
-        }
-        .product-image-area.large-bg {
-            background: linear-gradient(140deg, #E1261C 0%, #c41f16 100%);
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #1A1A1A;
         }
 
-        /* Box SVG illustration */
-        .box-illustration {
-            width: 60%;
-            height: 60%;
-        }
-
-        /* Badge on product image */
-        .img-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            font-family: 'Montserrat', sans-serif;
+        /* Savings badge */
+        .savings-badge {
+            display: inline-block;
+            background: #E1261C;
+            color: white;
             font-size: 9px;
             font-weight: 800;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            padding: 5px 12px;
+            padding: 3px 10px;
             border-radius: 2px;
-        }
-
-        /* Pill tags */
-        .content-pill {
-            display: inline-block;
-            background: #F0F0F0;
-            border: 1px solid #e0e0e0;
-            border-radius: 3px;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #1A1A1A;
-            padding: 4px 8px;
-            margin: 3px 2px;
         }
 
         .logo-img {
             max-height: 80px;
             max-width: 140px;
             object-fit: contain;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.05));
             transition: transform 0.3s ease;
         }
-        .logo-img:hover {
-            transform: scale(1.05);
-        }
+        .logo-img:hover { transform: scale(1.05); }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
@@ -171,21 +146,14 @@
 </head>
 <body class="font-sans bg-white antialiased text-brand-black flex flex-col min-h-screen">
 
-    <!-- TICKER (same as main site) -->
+    <!-- TICKER -->
     <div class="repeating-bg-text border-b-4 border-brand-gray flex">
-        <span>
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
-        </span>
-        <span>
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
-        </span>
+        <span>KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • </span>
+        <span>KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • </span>
     </div>
 
-    <!-- HERO (same structure as main site) -->
+    <!-- HERO -->
     <header class="curve-bottom pt-12 pb-12 text-center relative z-20 overflow-visible">
-        <!-- Nav inside header -->
         <nav class="flex justify-between items-center max-w-6xl mx-auto px-6 mb-10">
             <a href="https://vacaysauce.com" class="flex flex-col leading-none">
                 <span class="text-brand-red font-serif font-black text-xl tracking-widest uppercase">Vacation</span>
@@ -199,197 +167,123 @@
                 <li><a href="https://vacaysauce.com/#contact" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition">Wholesale</a></li>
             </ul>
         </nav>
-
         <div class="container mx-auto px-4 relative z-20">
-            <h1 class="text-brand-red font-serif text-5xl md:text-7xl lg:text-9xl font-black tracking-widest uppercase drop-shadow-lg">
-                Shop Our
-            </h1>
-            <div class="font-script text-white text-5xl md:text-7xl lg:text-8xl -mt-4 md:-mt-8 lg:-mt-12 relative z-30 transform -rotate-3 drop-shadow-xl">
-                Condiment
-            </div>
-            <h1 class="text-brand-red font-serif text-5xl md:text-7xl lg:text-9xl font-black tracking-widest uppercase mt-[-10px] md:-mt-6 lg:-mt-10 drop-shadow-lg">
-                Boxes
-            </h1>
+            <h1 class="text-brand-red font-serif text-5xl md:text-7xl lg:text-9xl font-black tracking-widest uppercase drop-shadow-lg">Shop Our</h1>
+            <div class="font-script text-white text-5xl md:text-7xl lg:text-8xl -mt-4 md:-mt-8 lg:-mt-12 relative z-30 transform -rotate-3 drop-shadow-xl">Condiment</div>
+            <h1 class="text-brand-red font-serif text-5xl md:text-7xl lg:text-9xl font-black tracking-widest uppercase mt-[-10px] md:-mt-6 lg:-mt-10 drop-shadow-lg">Boxes</h1>
         </div>
     </header>
 
-    <!-- Spacer for curve -->
     <div class="h-24 md:h-32 bg-white"></div>
 
     <!-- INTRO -->
-    <section class="py-6 bg-white container mx-auto px-6 max-w-3xl text-center">
-        <h2 class="text-2xl md:text-4xl font-extrabold text-brand-black uppercase tracking-wide mb-4">
-            The Ultimate Guest Amenity
-        </h2>
-        <p class="text-base md:text-lg text-gray-600 font-medium leading-relaxed">
-            Every condiment your guests need — shipped directly to your <strong class="text-brand-red">Airbnb</strong> or <strong class="text-brand-red">Vacation Rental</strong>. No restocking half-empty bottles ever again.
+    <section class="py-4 bg-white text-center px-6">
+        <h2 class="text-2xl md:text-4xl font-extrabold text-brand-black uppercase tracking-wide mb-3">Choose Your Delivery Size</h2>
+        <p class="text-base text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
+            Order in pre-packed deliveries — each option below is priced per full delivery. Need more? <strong class="text-brand-black">Adjust the quantity at checkout</strong> to add additional deliveries.
         </p>
-        <!-- Value callout -->
-        <div class="mt-6 inline-block bg-brand-black text-white font-bold text-sm uppercase tracking-widest px-6 py-3 rounded">
-            Over <span class="text-brand-red">$60 in value</span> — packed into every box
+        <div class="mt-5 inline-block bg-brand-black text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded">
+            Over <span class="text-brand-red">$60 in value</span> per box — all America's favorite brands
         </div>
     </section>
 
-    <!-- PRODUCT CARDS -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-6 max-w-5xl">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <!-- ════════════════════════════════════════ -->
+    <!--  SMALL CONDIMENT BOX                    -->
+    <!-- ════════════════════════════════════════ -->
+    <section class="pt-16 pb-4 bg-white">
+        <div class="product-section">
+            <div class="product-section-header">
+                <h2 class="font-serif text-4xl md:text-5xl font-black text-brand-black uppercase tracking-wide">Small Box</h2>
+                <span class="font-script text-brand-red text-3xl -mt-1">deliveries</span>
+            </div>
+            <p class="text-sm text-gray-500 font-medium mb-8 -mt-2">
+                All 12 must-have condiments in travel-friendly sizes. Choose a delivery size — order multiple deliveries at checkout.
+            </p>
 
-                <!-- SMALL BOX -->
-                <div class="product-card">
-                    <!-- Image area -->
-                    <div class="product-image-area small-bg">
-                        <div class="img-badge bg-white text-brand-black">Small Box</div>
-                        <!-- SVG Placeholder: box with condiment bottles -->
-                        <svg class="box-illustration" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Box shadow -->
-                            <ellipse cx="110" cy="192" rx="75" ry="7" fill="rgba(0,0,0,0.3)"/>
-                            <!-- Box body -->
-                            <rect x="25" y="95" width="170" height="90" rx="4" fill="#c8a55e"/>
-                            <!-- Box top flap -->
-                            <polygon points="25,95 195,95 178,58 42,58" fill="#d4b472"/>
-                            <!-- Fold line -->
-                            <line x1="110" y1="58" x2="110" y2="95" stroke="#b8944a" stroke-width="1.5" stroke-dasharray="4,3"/>
-                            <!-- Ketchup bottle -->
-                            <rect x="48" y="108" width="20" height="62" rx="3" fill="#E1261C"/>
-                            <rect x="53" y="102" width="10" height="9" rx="2" fill="#c01f16"/>
-                            <rect x="51" y="122" width="14" height="10" rx="1" fill="rgba(255,255,255,0.25)"/>
-                            <!-- Mustard bottle -->
-                            <rect x="76" y="112" width="18" height="58" rx="3" fill="#f0b429"/>
-                            <rect x="80" y="106" width="10" height="9" rx="2" fill="#d4941a"/>
-                            <rect x="78" y="124" width="13" height="9" rx="1" fill="rgba(255,255,255,0.25)"/>
-                            <!-- Mayo bottle -->
-                            <rect x="102" y="109" width="18" height="61" rx="3" fill="#f5f0e8"/>
-                            <rect x="106" y="103" width="10" height="9" rx="2" fill="#ddd5c4"/>
-                            <rect x="104" y="121" width="13" height="9" rx="1" fill="rgba(0,0,0,0.08)"/>
-                            <!-- BBQ bottle -->
-                            <rect x="128" y="107" width="20" height="63" rx="3" fill="#6b2d0e"/>
-                            <rect x="133" y="101" width="10" height="9" rx="2" fill="#581f08"/>
-                            <rect x="130" y="120" width="14" height="9" rx="1" fill="rgba(255,255,255,0.15)"/>
-                            <!-- Hot sauce small -->
-                            <rect x="156" y="114" width="14" height="56" rx="3" fill="#e85d20"/>
-                            <rect x="159" y="108" width="8" height="9" rx="2" fill="#c84a10"/>
-                            <!-- Brand text on box -->
-                            <text x="110" y="148" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="7" font-weight="800" letter-spacing="2" fill="rgba(255,255,255,0.5)" text-transform="uppercase">VACATION</text>
-                        </svg>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                    <!-- Card body -->
-                    <div class="p-7 flex flex-col flex-1">
-                        <p class="text-xs font-bold tracking-widest uppercase text-brand-red mb-2">Perfect for Single Properties</p>
-                        <h2 class="font-serif text-3xl font-black text-brand-black leading-tight">Small<br>Condiment Box</h2>
-                        <div class="w-10 h-1 bg-brand-red rounded mt-4 mb-4"></div>
-                        <p class="text-sm text-gray-600 leading-relaxed font-medium mb-4">
-                            All 12 must-have condiments in travel-friendly sizes — from America's favorite brands. Ketchup, mustard, mayo, ranch, BBQ, hot sauce, steak sauce, olive oil, salt, pepper, and more.
-                        </p>
-                        <!-- Content pills -->
-                        <div class="mb-5">
-                            <span class="content-pill">Hunt's Ketchup</span>
-                            <span class="content-pill">French's Mustard</span>
-                            <span class="content-pill">Duke's Mayo</span>
-                            <span class="content-pill">Hidden Valley Ranch</span>
-                            <span class="content-pill">A-1 Steak Sauce</span>
-                            <span class="content-pill">Sweet Baby Ray's BBQ</span>
-                            <span class="content-pill">Cholula Hot Sauce</span>
-                            <span class="content-pill">Gulden's Mustard</span>
-                            <span class="content-pill">McCormick Seasoning</span>
-                            <span class="content-pill">Olive Oil</span>
-                            <span class="content-pill">Salt &amp; Pepper</span>
-                        </div>
-                        <!-- Price + CTA -->
-                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                <!-- Small 12-Pack -->
+                <div class="option-card">
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-start justify-between mb-4">
                             <div>
-                                <span class="font-serif font-black text-4xl text-brand-black">$14</span>
-                                <span class="text-xs text-gray-400 font-bold block mt-0.5 uppercase tracking-wide">per box</span>
+                                <p class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-1">Small Box</p>
+                                <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">12-Box<br>Delivery</h3>
                             </div>
-                            <a href="https://buy.stripe.com/test_bJecN40wZaWSfdt4OgbMQ00"
-                               target="_blank" rel="noopener"
-                               class="bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-7 rounded shadow-md transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest">
-                                Order Now →
-                            </a>
+                            <div class="text-right">
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$102</div>
+                                <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
+                            </div>
                         </div>
+                        <div class="w-10 h-0.5 bg-brand-red mb-4"></div>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-4">
+                            A delivery of 12 small condiment boxes — perfect for a single property or small rotation. Each box is packed with all the essentials guests reach for most.
+                        </p>
+                        <!-- Per-unit breakdown -->
+                        <div class="bg-gray-50 rounded-lg p-4 mb-5">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-bold text-brand-black">12 boxes</span>
+                                <span class="font-bold text-brand-black">$102.00</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Price per box</span>
+                                <span class="font-bold">$8.50 / box</span>
+                            </div>
+                            <div class="border-t border-gray-200 mt-3 pt-3 text-xs text-gray-400 italic">
+                                Ordering more? Adjust quantity at checkout — each additional delivery adds 12 boxes.
+                            </div>
+                        </div>
+                        <a href="https://buy.stripe.com/cNi5kC98I1Eb0SE3hYao802"
+                           target="_blank" rel="noopener"
+                           class="mt-auto bg-brand-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded shadow transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest text-center">
+                            Order 12-Box Delivery →
+                        </a>
                     </div>
                 </div>
 
-                <!-- LARGE BOX -->
-                <div class="product-card">
-                    <!-- Image area -->
-                    <div class="product-image-area large-bg">
-                        <div class="img-badge bg-brand-black text-white">Best Value</div>
-                        <!-- SVG Placeholder: larger box -->
-                        <svg class="box-illustration" viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Box shadow -->
-                            <ellipse cx="110" cy="193" rx="80" ry="7" fill="rgba(0,0,0,0.25)"/>
-                            <!-- Box body (wider/taller) -->
-                            <rect x="18" y="88" width="184" height="100" rx="4" fill="#c8a55e"/>
-                            <!-- Box top flap -->
-                            <polygon points="18,88 202,88 183,46 37,46" fill="#d4b472"/>
-                            <!-- Fold line -->
-                            <line x1="110" y1="46" x2="110" y2="88" stroke="#b8944a" stroke-width="1.5" stroke-dasharray="4,3"/>
-                            <!-- Bottles — more of them for "Large" -->
-                            <!-- Ketchup -->
-                            <rect x="30" y="100" width="20" height="72" rx="3" fill="#E1261C"/>
-                            <rect x="35" y="93" width="10" height="10" rx="2" fill="#c01f16"/>
-                            <rect x="32" y="116" width="15" height="10" rx="1" fill="rgba(255,255,255,0.25)"/>
-                            <!-- Yellow mustard -->
-                            <rect x="57" y="104" width="18" height="68" rx="3" fill="#f0b429"/>
-                            <rect x="61" y="97" width="10" height="10" rx="2" fill="#d4941a"/>
-                            <!-- Mayo -->
-                            <rect x="82" y="101" width="18" height="71" rx="3" fill="#f5f0e8"/>
-                            <rect x="86" y="94" width="10" height="10" rx="2" fill="#ddd5c4"/>
-                            <!-- Ranch (white bottle) -->
-                            <rect x="107" y="103" width="18" height="69" rx="3" fill="#f9f7f2"/>
-                            <rect x="111" y="96" width="10" height="10" rx="2" fill="#e8e4dc"/>
-                            <rect x="109" y="118" width="13" height="9" rx="1" fill="rgba(0,0,0,0.06)"/>
-                            <!-- BBQ -->
-                            <rect x="132" y="99" width="20" height="73" rx="3" fill="#6b2d0e"/>
-                            <rect x="137" y="92" width="10" height="10" rx="2" fill="#581f08"/>
-                            <!-- Hot sauce -->
-                            <rect x="159" y="106" width="14" height="66" rx="3" fill="#e85d20"/>
-                            <rect x="162" y="99" width="8" height="10" rx="2" fill="#c84a10"/>
-                            <!-- Brown mustard (small, peeking behind) -->
-                            <rect x="175" y="112" width="12" height="60" rx="3" fill="#8b6914"/>
-                            <rect x="177" y="106" width="8" height="9" rx="2" fill="#6e5210"/>
-                            <!-- Brand text on box -->
-                            <text x="110" y="152" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="7" font-weight="800" letter-spacing="2" fill="rgba(255,255,255,0.4)">VACATION</text>
-                        </svg>
+                <!-- Small 27-Pack — Best Value -->
+                <div class="option-card best-value">
+                    <div class="bg-brand-red text-white text-center py-2 px-4">
+                        <span class="text-xs font-black tracking-widest uppercase">★ Best Value — Save $1.08 per Box</span>
                     </div>
-
-                    <!-- Card body -->
-                    <div class="p-7 flex flex-col flex-1">
-                        <p class="text-xs font-bold tracking-widest uppercase text-brand-red mb-2">Ideal for Property Managers</p>
-                        <h2 class="font-serif text-3xl font-black text-brand-black leading-tight">Large<br>Condiment Box</h2>
-                        <div class="w-10 h-1 bg-brand-red rounded mt-4 mb-4"></div>
-                        <p class="text-sm text-gray-600 leading-relaxed font-medium mb-4">
-                            All the same great brands in larger sizes — perfect for extended stays or stocking multiple units at once. More volume, more value, same zero-hassle convenience.
-                        </p>
-                        <!-- Content pills -->
-                        <div class="mb-5">
-                            <span class="content-pill">Hunt's Ketchup</span>
-                            <span class="content-pill">French's Mustard</span>
-                            <span class="content-pill">Duke's Mayo</span>
-                            <span class="content-pill">Hidden Valley Ranch</span>
-                            <span class="content-pill">A-1 Steak Sauce</span>
-                            <span class="content-pill">Sweet Baby Ray's BBQ</span>
-                            <span class="content-pill">Cholula Hot Sauce</span>
-                            <span class="content-pill">Gulden's Mustard</span>
-                            <span class="content-pill">McCormick Seasoning</span>
-                            <span class="content-pill">Olive Oil</span>
-                            <span class="content-pill">Salt &amp; Pepper</span>
-                            <span class="content-pill">Larger Sizes</span>
-                        </div>
-                        <!-- Price + CTA -->
-                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-start justify-between mb-4">
                             <div>
-                                <span class="font-serif font-black text-4xl text-brand-black">$27</span>
-                                <span class="text-xs text-gray-400 font-bold block mt-0.5 uppercase tracking-wide">per box</span>
+                                <p class="text-xs font-bold tracking-widest uppercase text-brand-red mb-1">Most Popular</p>
+                                <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">27-Box<br>Delivery</h3>
                             </div>
-                            <a href="https://buy.stripe.com/test_5kQcN4a7ze94d5leoQbMQ01"
-                               target="_blank" rel="noopener"
-                               class="bg-brand-black hover:bg-gray-800 text-white font-bold py-3 px-7 rounded shadow-md transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest">
-                                Order Now →
-                            </a>
+                            <div class="text-right">
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$218.70</div>
+                                <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
+                            </div>
                         </div>
+                        <div class="w-10 h-0.5 bg-brand-red mb-4"></div>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-4">
+                            A delivery of 27 small condiment boxes — ideal for hosts managing multiple units or keeping a well-stocked supply on hand. More boxes, better rate per unit.
+                        </p>
+                        <!-- Per-unit breakdown -->
+                        <div class="bg-red-50 border border-red-100 rounded-lg p-4 mb-5">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-bold text-brand-black">27 boxes</span>
+                                <span class="font-bold text-brand-black">$218.70</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-500">
+                                <span>Price per box</span>
+                                <span class="font-bold text-brand-red">$8.10 / box</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>vs. 12-box rate ($8.50)</span>
+                                <span class="font-bold text-brand-red">Save $0.40/box</span>
+                            </div>
+                            <div class="border-t border-red-100 mt-3 pt-3 text-xs text-gray-400 italic">
+                                Ordering more? Adjust quantity at checkout — each additional delivery adds 27 boxes.
+                            </div>
+                        </div>
+                        <a href="https://buy.stripe.com/5kQ7sKfx66Yv0SE4m2ao803"
+                           target="_blank" rel="noopener"
+                           class="mt-auto bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded shadow-md transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest text-center">
+                            Order 27-Box Delivery →
+                        </a>
                     </div>
                 </div>
 
@@ -397,23 +291,127 @@
         </div>
     </section>
 
-    <!-- BRANDS (same as main site) -->
+    <!-- ════════════════════════════════════════ -->
+    <!--  LARGE CONDIMENT BOX                    -->
+    <!-- ════════════════════════════════════════ -->
+    <section class="pt-8 pb-16 bg-white">
+        <div class="product-section">
+            <div class="product-section-header">
+                <h2 class="font-serif text-4xl md:text-5xl font-black text-brand-black uppercase tracking-wide">Large Box</h2>
+                <span class="font-script text-brand-red text-3xl -mt-1">deliveries</span>
+            </div>
+            <p class="text-sm text-gray-500 font-medium mb-8 -mt-2">
+                Same great brands, larger sizes — built for extended stays and high-turnover properties. Choose a delivery size — order multiple deliveries at checkout.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Large 12-Pack -->
+                <div class="option-card">
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <p class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-1">Large Box</p>
+                                <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">12-Box<br>Delivery</h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$199.20</div>
+                                <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
+                            </div>
+                        </div>
+                        <div class="w-10 h-0.5 bg-brand-red mb-4"></div>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-4">
+                            A delivery of 12 large condiment boxes. Larger sizes of every condiment means fewer restocks and happier guests on longer stays.
+                        </p>
+                        <!-- Per-unit breakdown -->
+                        <div class="bg-gray-50 rounded-lg p-4 mb-5">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-bold text-brand-black">12 boxes</span>
+                                <span class="font-bold text-brand-black">$199.20</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Price per box</span>
+                                <span class="font-bold">$16.60 / box</span>
+                            </div>
+                            <div class="border-t border-gray-200 mt-3 pt-3 text-xs text-gray-400 italic">
+                                Ordering more? Adjust quantity at checkout — each additional delivery adds 12 boxes.
+                            </div>
+                        </div>
+                        <a href="https://buy.stripe.com/7sY00i84E4Qn44Q8Ciao804"
+                           target="_blank" rel="noopener"
+                           class="mt-auto bg-brand-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded shadow transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest text-center">
+                            Order 12-Box Delivery →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Large 18-Pack — Best Value -->
+                <div class="option-card best-value">
+                    <div class="bg-brand-red text-white text-center py-2 px-4">
+                        <span class="text-xs font-black tracking-widest uppercase">★ Best Value — Save $1.10 per Box</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <p class="text-xs font-bold tracking-widest uppercase text-brand-red mb-1">Most Popular</p>
+                                <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">18-Box<br>Delivery</h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$279</div>
+                                <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
+                            </div>
+                        </div>
+                        <div class="w-10 h-0.5 bg-brand-red mb-4"></div>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-4">
+                            A delivery of 18 large condiment boxes — the go-to choice for property managers stocking multiple vacation rentals at once. Maximum value per box.
+                        </p>
+                        <!-- Per-unit breakdown -->
+                        <div class="bg-red-50 border border-red-100 rounded-lg p-4 mb-5">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-bold text-brand-black">18 boxes</span>
+                                <span class="font-bold text-brand-black">$279.00</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-500">
+                                <span>Price per box</span>
+                                <span class="font-bold text-brand-red">$15.50 / box</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>vs. 12-box rate ($16.60)</span>
+                                <span class="font-bold text-brand-red">Save $1.10/box</span>
+                            </div>
+                            <div class="border-t border-red-100 mt-3 pt-3 text-xs text-gray-400 italic">
+                                Ordering more? Adjust quantity at checkout — each additional delivery adds 18 boxes.
+                            </div>
+                        </div>
+                        <a href="https://buy.stripe.com/bJe4gygBaciPgRC9Gmao805"
+                           target="_blank" rel="noopener"
+                           class="mt-auto bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded shadow-md transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest text-center">
+                            Order 18-Box Delivery →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BRANDS -->
     <section class="py-16 bg-brand-lightgray">
         <div class="container mx-auto px-6 max-w-5xl">
             <h3 class="text-center text-sm font-bold text-brand-gray mb-10 uppercase tracking-widest">Featuring America's Favorite Brands</h3>
             <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-90">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Hunt%27s_logo.svg" alt="Hunt's" class="logo-img" onerror="this.outerHTML='<span class=\'font-sans font-black text-red-600 text-3xl\'>Hunt\'s</span>'">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Duke%27s_Mayonnaise_logo.svg/512px-Duke%27s_Mayonnaise_logo.svg.png" alt="Duke's Mayo" class="logo-img" onerror="this.outerHTML='<span class=\'font-sans font-black bg-black text-white px-4 py-2 rounded-full text-xl\'>Duke\'s MAYO</span>'">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Sweet_Baby_Ray%27s_logo.svg/512px-Sweet_Baby_Ray%27s_logo.svg.png" alt="Sweet Baby Ray's" class="logo-img" onerror="this.outerHTML='<span class=\'font-serif font-bold text-red-700 text-2xl\'>Sweet Baby Ray\'s</span>'">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/French%27s_logo.svg/512px-French%27s_logo.svg.png" alt="French's" class="logo-img" onerror="this.outerHTML='<span class=\'font-sans font-bold text-yellow-500 text-4xl\'>French\'s</span>'">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/A.1._Sauce_logo.svg/512px-A.1._Sauce_logo.svg.png" alt="A.1. Steak Sauce" class="logo-img" onerror="this.outerHTML='<span class=\'font-sans font-black text-red-600 text-4xl border-2 border-red-600 px-2\'>A.1.</span>'">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/McCormick_%26_Company_logo.svg/512px-McCormick_%26_Company_logo.svg.png" alt="McCormick" class="logo-img" onerror="this.outerHTML='<span class=\'font-sans font-bold text-red-600 text-2xl\'>McCormick</span>'">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Cholula_Hot_Sauce_logo.svg/512px-Cholula_Hot_Sauce_logo.svg.png" alt="Cholula" class="logo-img" onerror="this.outerHTML='<span class=\'font-serif font-bold text-orange-600 text-3xl\'>Cholula</span>'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Hunt%27s_logo.svg" alt="Hunt's" class="logo-img" onerror="this.outerHTML='<span class=\'font-black text-red-600 text-3xl\'>Hunt\'s</span>'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Duke%27s_Mayonnaise_logo.svg/512px-Duke%27s_Mayonnaise_logo.svg.png" alt="Duke's Mayo" class="logo-img" onerror="this.outerHTML='<span class=\'font-black bg-black text-white px-4 py-2 rounded-full text-xl\'>Duke\'s</span>'">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Sweet_Baby_Ray%27s_logo.svg/512px-Sweet_Baby_Ray%27s_logo.svg.png" alt="Sweet Baby Ray's" class="logo-img" onerror="this.outerHTML='<span class=\'font-bold text-red-700 text-2xl\'>Sweet Baby Ray\'s</span>'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/French%27s_logo.svg/512px-French%27s_logo.svg.png" alt="French's" class="logo-img" onerror="this.outerHTML='<span class=\'font-bold text-yellow-500 text-4xl\'>French\'s</span>'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/A.1._Sauce_logo.svg/512px-A.1._Sauce_logo.svg.png" alt="A.1. Steak Sauce" class="logo-img" onerror="this.outerHTML='<span class=\'font-black text-red-600 text-4xl border-2 border-red-600 px-2\'>A.1.</span>'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/McCormick_%26_Company_logo.svg/512px-McCormick_%26_Company_logo.svg.png" alt="McCormick" class="logo-img" onerror="this.outerHTML='<span class=\'font-bold text-red-600 text-2xl\'>McCormick</span>'">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Cholula_Hot_Sauce_logo.svg/512px-Cholula_Hot_Sauce_logo.svg.png" alt="Cholula" class="logo-img" onerror="this.outerHTML='<span class=\'font-bold text-orange-600 text-3xl\'>Cholula</span>'">
             </div>
         </div>
     </section>
 
-    <!-- WHAT'S INSIDE — red curved section (same as main site) -->
+    <!-- WHAT'S INSIDE — red curved section -->
     <section id="whats-inside" class="curve-top-red pt-24 pb-16 text-white mt-12 relative z-10">
         <div class="container mx-auto px-6 max-w-5xl relative z-20">
             <h2 class="text-center text-2xl md:text-4xl font-extrabold uppercase tracking-widest mb-12 drop-shadow-md">
@@ -444,27 +442,32 @@
                     No Waste. Over $60 if purchased separately.
                 </h3>
             </div>
-            <!-- Shop CTAs inside red section -->
-            <div class="flex flex-col md:flex-row justify-center gap-4 mt-12">
-                <a href="https://buy.stripe.com/test_bJecN40wZaWSfdt4OgbMQ00"
-                   target="_blank" rel="noopener"
-                   class="bg-white text-brand-red hover:bg-gray-100 font-bold py-4 px-8 rounded shadow-lg transition text-sm uppercase tracking-widest text-center">
-                    Order Small Box — $14
+            <!-- Quick order links inside red section -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+                <a href="https://buy.stripe.com/cNi5kC98I1Eb0SE3hYao802" target="_blank" rel="noopener"
+                   class="bg-white text-brand-black hover:bg-gray-100 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
+                    Small<br><span class="text-brand-red">12-Box — $102</span>
                 </a>
-                <a href="https://buy.stripe.com/test_5kQcN4a7ze94d5leoQbMQ01"
-                   target="_blank" rel="noopener"
-                   class="bg-brand-black text-white hover:bg-gray-900 font-bold py-4 px-8 rounded shadow-lg transition text-sm uppercase tracking-widest text-center">
-                    Order Large Box — $27
+                <a href="https://buy.stripe.com/5kQ7sKfx66Yv0SE4m2ao803" target="_blank" rel="noopener"
+                   class="bg-brand-black text-white hover:bg-gray-900 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
+                    Small<br><span class="text-brand-red">27-Box — $218.70</span>
+                </a>
+                <a href="https://buy.stripe.com/7sY00i84E4Qn44Q8Ciao804" target="_blank" rel="noopener"
+                   class="bg-white text-brand-black hover:bg-gray-100 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
+                    Large<br><span class="text-brand-red">12-Box — $199.20</span>
+                </a>
+                <a href="https://buy.stripe.com/bJe4gygBaciPgRC9Gmao805" target="_blank" rel="noopener"
+                   class="bg-brand-black text-white hover:bg-gray-900 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
+                    Large<br><span class="text-brand-red">18-Box — $279</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- WHOLESALE CTA (same as main site contact block) -->
+    <!-- WHOLESALE / CONTACT -->
     <section id="contact" class="py-20 bg-brand-lightgray relative">
         <div class="container mx-auto px-6 max-w-4xl">
             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
-                <!-- Left: black info block -->
                 <div class="bg-brand-black text-white p-10 md:w-2/5 flex flex-col justify-center relative overflow-hidden">
                     <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 2px, transparent 2px, transparent 8px);"></div>
                     <h3 class="font-serif text-3xl font-bold mb-4 relative z-10 text-brand-red uppercase tracking-wide">Partner With Us</h3>
@@ -473,20 +476,19 @@
                     </p>
                     <ul class="space-y-4 text-sm font-bold relative z-10">
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             Direct Shipping Available
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             Bulk Pricing for Mgmt Companies
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                             Elevate Guest Satisfaction
                         </li>
                     </ul>
                 </div>
-                <!-- Right: Form -->
                 <div class="p-10 md:w-3/5">
                     <h3 class="text-2xl font-extrabold text-brand-black mb-6 uppercase tracking-wider">Get in Touch</h3>
                     <form onsubmit="event.preventDefault(); alert('Thank you for your interest! A representative will contact you shortly.');">
@@ -526,7 +528,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (same as main site) -->
+    <!-- FOOTER -->
     <footer class="bg-brand-black text-center py-8 text-gray-500 text-sm font-sans">
         <p class="mb-2 font-serif text-brand-red text-xl uppercase font-bold tracking-widest">
             Vacation <span class="font-script text-white text-2xl lowercase transform -rotate-2 inline-block -mx-1">Condiment</span> Essentials

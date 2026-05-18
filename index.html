@@ -12,7 +12,7 @@
                 extend: {
                     colors: {
                         brand: {
-                            red: '#E1261C', // Adjusted to match the vibrant red of the box
+                            red: '#E1261C',
                             black: '#1A1A1A',
                             gray: '#B3B3B3',
                             lightgray: '#F0F0F0'
@@ -28,7 +28,6 @@
         }
     </script>
     <style>
-        /* Custom styles for specific elements not easily handled by Tailwind utilities */
         .repeating-bg-text {
             white-space: nowrap;
             overflow: hidden;
@@ -42,12 +41,10 @@
             user-select: none;
             position: relative;
         }
-        
         .repeating-bg-text span {
             display: inline-block;
             animation: scrollText 60s linear infinite;
         }
-
         @keyframes scrollText {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -57,7 +54,6 @@
             position: relative;
             background: #1A1A1A;
         }
-
         .curve-bottom::after {
             content: '';
             position: absolute;
@@ -69,13 +65,12 @@
             border-radius: 50%;
             z-index: 10;
         }
-        
+
         .curve-top-red {
             position: relative;
             background: #E1261C;
             margin-top: 50px;
         }
-
         .curve-top-red::before {
             content: '';
             position: absolute;
@@ -95,43 +90,106 @@
             filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.05));
             transition: transform 0.3s ease;
         }
-        
         .logo-img:hover {
             transform: scale(1.05);
         }
 
-        /* Hide scrollbar for clean aesthetic */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Mobile menu */
+        #mobile-menu {
+            display: none;
         }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
+        #mobile-menu.open {
+            display: flex;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #E1261C; 
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b91c13; 
-        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #E1261C; }
+        ::-webkit-scrollbar-thumb:hover { background: #b91c13; }
     </style>
 </head>
 <body class="font-sans bg-white antialiased text-brand-black flex flex-col min-h-screen">
 
-    <!-- Repeating Top Pattern (mimicking the box top edge) -->
+    <!-- TICKER -->
     <div class="repeating-bg-text border-b-4 border-brand-gray flex">
-        <!-- Duplicated to allow for smooth scrolling effect -->
         <span>
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • 
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • 
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
         </span>
         <span>
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • 
-            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • 
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
+            KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE •
         </span>
     </div>
 
-    <!-- Hero / Header Section -->
-    <header class="curve-bottom pt-16 pb-12 text-center relative z-20 overflow-visible">
+    <!-- HERO / HEADER -->
+    <header class="curve-bottom pt-6 pb-12 text-center relative z-20 overflow-visible">
+
+        <!-- NAV -->
+        <nav class="relative z-30 max-w-7xl mx-auto px-6 mb-10">
+            <div class="flex justify-between items-center">
+
+                <!-- Logo -->
+                <a href="https://vacaysauce.com" class="flex flex-col leading-none text-left">
+                    <span class="text-brand-red font-serif font-black text-xl tracking-widest uppercase">Vacation</span>
+                    <span class="font-script text-white text-lg -mt-1">Condiment</span>
+                    <span class="text-brand-red font-serif font-black text-xl tracking-widest uppercase -mt-2">Essentials</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <ul class="hidden md:flex items-center gap-8 list-none">
+                    <li>
+                        <a href="https://vacaysauce.com" class="text-brand-red font-bold text-xs tracking-widest uppercase border-b-2 border-brand-red pb-0.5">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://vacaysauce.com/shop" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition-colors duration-200">
+                            Shop
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#whats-inside" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition-colors duration-200">
+                            What's Inside
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://vacaysauce.com/labels" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition-colors duration-200">
+                            Labels
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition-colors duration-200">
+                            Wholesale
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://vacaysauce.com/shop" class="bg-brand-red hover:bg-red-700 text-white font-bold text-xs tracking-widest uppercase px-5 py-2.5 rounded transition-colors duration-200">
+                            Order Now
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Mobile Hamburger -->
+                <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2" onclick="toggleMenu()" aria-label="Open menu">
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                    <span class="block w-6 h-0.5 bg-white"></span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="flex-col items-start gap-4 mt-6 border-t border-gray-700 pt-6 text-left">
+                <a href="https://vacaysauce.com" class="text-brand-red font-bold text-xs tracking-widest uppercase block">Home</a>
+                <a href="https://vacaysauce.com/shop" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition block">Shop</a>
+                <a href="#whats-inside" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition block" onclick="toggleMenu()">What's Inside</a>
+                <a href="https://vacaysauce.com/labels" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition block">Labels</a>
+                <a href="#contact" class="text-white font-bold text-xs tracking-widest uppercase hover:text-brand-red transition block" onclick="toggleMenu()">Wholesale</a>
+                <a href="https://vacaysauce.com/shop" class="bg-brand-red text-white font-bold text-xs tracking-widest uppercase px-5 py-2.5 rounded inline-block mt-2">Order Now</a>
+            </div>
+        </nav>
+
+        <!-- Hero Title -->
         <div class="container mx-auto px-4 relative z-20">
             <h1 class="text-brand-red font-serif text-5xl md:text-7xl lg:text-9xl font-black tracking-widest uppercase shadow-black drop-shadow-lg">
                 Vacation
@@ -148,7 +206,7 @@
     <!-- Spacer for curve -->
     <div class="h-24 md:h-32 bg-white"></div>
 
-    <!-- Value Proposition / Info Section -->
+    <!-- VALUE PROPOSITION -->
     <section class="py-12 bg-white container mx-auto px-6 max-w-6xl">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-extrabold text-brand-black mb-6 uppercase tracking-wide">
@@ -158,7 +216,7 @@
                 Available at your local grocery stores, or shipped directly to <strong class="text-brand-red">Airbnb Hosts</strong> and <strong class="text-brand-red">Vacation Rental Management Companies</strong>.
             </p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="#contact" class="bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded shadow-lg transform transition hover:-translate-y-1 text-lg">
+                <a href="https://vacaysauce.com/shop" class="bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded shadow-lg transform transition hover:-translate-y-1 text-lg">
                     Order for Your Properties
                 </a>
                 <a href="#whats-inside" class="bg-brand-black hover:bg-gray-800 text-white font-bold py-4 px-8 rounded shadow-lg transform transition hover:-translate-y-1 text-lg">
@@ -171,7 +229,6 @@
         <div class="mt-20">
             <h3 class="text-center text-xl font-bold text-brand-gray mb-10 uppercase tracking-widest">Featuring America's Favorite Brands</h3>
             <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-90">
-                <!-- Using Wikimedia standard logo URLs with fallback alt texts -->
                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Hunt%27s_logo.svg" alt="Hunt's" class="logo-img" onerror="this.outerHTML='<span class=\'font-sans font-black text-red-600 text-3xl\'>Hunt\'s</span>'">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Duke%27s_Mayonnaise_logo.svg/512px-Duke%27s_Mayonnaise_logo.svg.png" alt="Duke's Mayo" class="logo-img" onerror="this.outerHTML='<span class=\'font-sans font-black bg-black text-white px-4 py-2 rounded-full text-xl\'>Duke\'s MAYO</span>'">
                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Sweet_Baby_Ray%27s_logo.svg/512px-Sweet_Baby_Ray%27s_logo.svg.png" alt="Sweet Baby Ray's" class="logo-img" onerror="this.outerHTML='<span class=\'font-serif font-bold text-red-700 text-2xl\'>Sweet Baby Ray\'s</span>'">
@@ -183,31 +240,25 @@
         </div>
     </section>
 
-    <!-- The Box Content Section (Mimicking the back of the box) -->
+    <!-- WHAT'S INSIDE — red curved section -->
     <section id="whats-inside" class="curve-top-red pt-24 pb-16 text-white mt-12 relative z-10">
         <div class="container mx-auto px-6 max-w-7xl relative z-20">
             <h2 class="text-center text-2xl md:text-4xl font-extrabold uppercase tracking-widest mb-12 drop-shadow-md">
                 All the "Must Have" Condiments in one box!
             </h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 text-sm md:text-base lg:text-lg font-bold tracking-wide">
-                <!-- Column 1 -->
                 <div class="space-y-3">
                     <p>6.4 OZ. (181g) HUNTS KETCHUP</p>
                     <p>2 OZ. (57g) FRENCH'S YELLOW MUSTARD</p>
                     <p>1.9 OZ. (54g) GULDEN'S BROWN MUSTARD</p>
                     <p>4.5 OZ. (128g) HIDDEN VALLEY RANCH DRESSING</p>
                 </div>
-                
-                <!-- Column 2 -->
                 <div class="space-y-3">
                     <p>2 OZ. (57g) A-1 STEAK SAUCE</p>
                     <p>4.5 OZ. (128g) RAY'S BARBEQUE SAUCE</p>
                     <p>2 OZ. (57g) CHOLULA HOT SAUCE</p>
                     <p>3.2 OZ. (91g) DUKE'S MAYONAISE</p>
                 </div>
-                
-                <!-- Column 3 -->
                 <div class="space-y-3">
                     <p>1 OZ. (28g) McCORMICK STEAK SEASONING</p>
                     <p>1.25 OZ. (35g) BLACK PEPPER</p>
@@ -215,44 +266,49 @@
                     <p>2 OZ. (57g) EXTRA VIRGIN OLIVE OIL</p>
                 </div>
             </div>
-
             <div class="text-center mt-16 pb-8 border-b border-red-400">
                 <h3 class="text-xl md:text-3xl font-extrabold tracking-widest uppercase">
                     No Waste. Over $60 if purchased separately.
                 </h3>
             </div>
+            <!-- Shop CTA inside red section -->
+            <div class="flex flex-col md:flex-row justify-center gap-4 mt-10">
+                <a href="https://vacaysauce.com/shop" class="bg-white text-brand-red hover:bg-gray-100 font-bold py-4 px-8 rounded shadow-lg transition text-sm uppercase tracking-widest text-center">
+                    Shop Now
+                </a>
+                <a href="#contact" class="bg-brand-black text-white hover:bg-gray-900 font-bold py-4 px-8 rounded shadow-lg transition text-sm uppercase tracking-widest text-center">
+                    Wholesale Inquiries
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Contact & Direct Shipping Form -->
+    <!-- CONTACT / WHOLESALE FORM -->
     <section id="contact" class="py-20 bg-brand-lightgray relative">
         <div class="container mx-auto px-6 max-w-4xl">
             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
                 <!-- Left Side: Info -->
                 <div class="bg-brand-black text-white p-10 md:w-2/5 flex flex-col justify-center relative overflow-hidden">
-                    <!-- Subtle repeating background inside the black box -->
                     <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 2px, transparent 2px, transparent 8px);"></div>
-                    
                     <h3 class="font-serif text-3xl font-bold mb-4 relative z-10 text-brand-red uppercase tracking-wide">Partner With Us</h3>
                     <p class="mb-6 text-gray-300 text-sm relative z-10 font-sans leading-relaxed">
                         Are you a property manager or Airbnb host? Eliminate the hassle of restocking half-empty condiment bottles.
                     </p>
                     <ul class="space-y-4 text-sm font-bold relative z-10">
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 text-brand-red mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             Direct Shipping Available
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 text-brand-red mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             Bulk Pricing for Mgmt Companies
                         </li>
                         <li class="flex items-center">
-                            <svg class="w-5 h-5 text-brand-red mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <svg class="w-5 h-5 text-brand-red mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             Elevate Guest Satisfaction
                         </li>
                     </ul>
                 </div>
-                
                 <!-- Right Side: Form -->
                 <div class="p-10 md:w-3/5">
                     <h3 class="text-2xl font-extrabold text-brand-black mb-6 uppercase tracking-wider">Get in Touch</h3>
@@ -293,12 +349,28 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="bg-brand-black text-center py-8 text-gray-500 text-sm font-sans flex-grow">
-        <p class="mb-2 font-serif text-brand-red text-xl uppercase font-bold tracking-widest">Vacation <span class="font-script text-white text-2xl lowercase transform -rotate-2 inline-block -mx-1">Condiment</span> Essentials</p>
+        <p class="mb-2 font-serif text-brand-red text-xl uppercase font-bold tracking-widest">
+            Vacation <span class="font-script text-white text-2xl lowercase transform -rotate-2 inline-block -mx-1">Condiment</span> Essentials
+        </p>
         <p>&copy; 2026 Vacation Condiment Essentials. All rights reserved.</p>
         <p class="mt-1">Brand names and logos are trademarks of their respective owners.</p>
+        <!-- Footer nav -->
+        <div class="flex justify-center gap-6 mt-4 text-xs font-bold uppercase tracking-widest">
+            <a href="https://vacaysauce.com" class="hover:text-brand-red transition">Home</a>
+            <a href="https://vacaysauce.com/shop" class="hover:text-brand-red transition">Shop</a>
+            <a href="https://vacaysauce.com/labels" class="hover:text-brand-red transition">Labels</a>
+            <a href="#contact" class="hover:text-brand-red transition">Wholesale</a>
+        </div>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+        }
+    </script>
 
 </body>
 </html>

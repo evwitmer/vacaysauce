@@ -101,8 +101,16 @@
             box-shadow: 0 4px 24px rgba(225,38,28,0.15);
         }
 
+        /* Product box graphic */
+        .box-image {
+            position: relative;
+            background: linear-gradient(160deg,#fafafa 0%,#ececec 100%);
+            border-bottom: 1px solid #ececec;
+        }
+        .box-svg { display: block; width: 100%; height: auto; }
+
         .product-section {
-            max-width: 960px;
+            max-width: 1120px;
             margin: 0 auto;
             padding: 0 24px 64px;
         }
@@ -143,6 +151,74 @@
 </head>
 <body class="font-sans bg-white antialiased text-brand-black flex flex-col min-h-screen">
 
+    <!-- ============================================================= -->
+    <!-- REUSABLE BOX GRAPHICS (SVG symbols, hidden)                   -->
+    <!-- ============================================================= -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <linearGradient id="boxBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fafafa"/>
+                <stop offset="1" stop-color="#e9e9e9"/>
+            </linearGradient>
+            <filter id="boxShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="10" stdDeviation="9" flood-color="#000" flood-opacity="0.26"/>
+            </filter>
+        </defs>
+
+        <!-- SMALL BOX (compact) -->
+        <symbol id="boxSmall" viewBox="0 0 300 210">
+            <ellipse cx="132" cy="188" rx="90" ry="12" fill="#000" opacity="0.12"/>
+            <g filter="url(#boxShadow)">
+                <polygon points="60,58 200,58 236,36 96,36" fill="#e9e9e9"/>
+                <polygon points="200,58 236,36 236,158 200,178" fill="#cfcfcf"/>
+                <rect x="60" y="58" width="140" height="120" fill="#ffffff"/>
+            </g>
+            <!-- top lid subtle red edge -->
+            <polygon points="60,58 200,58 200,63 60,63" fill="#E1261C" opacity="0.85"/>
+            <!-- red banner -->
+            <rect x="60" y="85" width="140" height="14" fill="#E1261C"/>
+            <text x="130" y="94.5" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="5.4" font-weight="800" fill="#fff" letter-spacing="0.4">ALL THE "MUST-HAVE" CONDIMENTS</text>
+            <!-- black band -->
+            <rect x="60" y="99" width="140" height="52" fill="#1A1A1A"/>
+            <text x="130" y="116" text-anchor="middle" font-family="'Playfair Display',serif" font-size="15" font-weight="900" fill="#E1261C" letter-spacing="1.6">VACATION</text>
+            <text x="130" y="131" text-anchor="middle" font-family="Yellowtail,cursive" font-size="13" fill="#ffffff">Condiment</text>
+            <text x="130" y="147" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" font-weight="900" fill="#E1261C" letter-spacing="1.4">ESSENTIALS</text>
+            <!-- brand strip -->
+            <text x="130" y="161" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="5" font-weight="800" fill="#555" letter-spacing="0.6">12 NAME-BRAND CONDIMENTS</text>
+            <circle cx="106" cy="169" r="3" fill="#E1261C"/>
+            <circle cx="118" cy="169" r="3" fill="#f5c518"/>
+            <circle cx="130" cy="169" r="3" fill="#1A1A1A"/>
+            <circle cx="142" cy="169" r="3" fill="#c0392b"/>
+            <circle cx="154" cy="169" r="3" fill="#e67e22"/>
+        </symbol>
+
+        <!-- LARGE BOX (taller) -->
+        <symbol id="boxLarge" viewBox="0 0 300 230">
+            <ellipse cx="130" cy="214" rx="100" ry="13" fill="#000" opacity="0.12"/>
+            <g filter="url(#boxShadow)">
+                <polygon points="55,55 205,55 241,33 91,33" fill="#e9e9e9"/>
+                <polygon points="205,55 241,33 241,183 205,205" fill="#cfcfcf"/>
+                <rect x="55" y="55" width="150" height="150" fill="#ffffff"/>
+            </g>
+            <polygon points="55,55 205,55 205,61 55,61" fill="#E1261C" opacity="0.85"/>
+            <!-- red banner -->
+            <rect x="55" y="94" width="150" height="15" fill="#E1261C"/>
+            <text x="130" y="104" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="5.8" font-weight="800" fill="#fff" letter-spacing="0.4">ALL THE "MUST-HAVE" CONDIMENTS</text>
+            <!-- black band -->
+            <rect x="55" y="109" width="150" height="60" fill="#1A1A1A"/>
+            <text x="130" y="128" text-anchor="middle" font-family="'Playfair Display',serif" font-size="17" font-weight="900" fill="#E1261C" letter-spacing="1.8">VACATION</text>
+            <text x="130" y="145" text-anchor="middle" font-family="Yellowtail,cursive" font-size="14" fill="#ffffff">Condiment</text>
+            <text x="130" y="163" text-anchor="middle" font-family="'Playfair Display',serif" font-size="16" font-weight="900" fill="#E1261C" letter-spacing="1.6">ESSENTIALS</text>
+            <!-- brand strip -->
+            <text x="130" y="181" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="5.4" font-weight="800" fill="#555" letter-spacing="0.6">12 NAME-BRAND CONDIMENTS · LARGER SIZES</text>
+            <circle cx="103" cy="192" r="3.4" fill="#E1261C"/>
+            <circle cx="116.5" cy="192" r="3.4" fill="#f5c518"/>
+            <circle cx="130" cy="192" r="3.4" fill="#1A1A1A"/>
+            <circle cx="143.5" cy="192" r="3.4" fill="#c0392b"/>
+            <circle cx="157" cy="192" r="3.4" fill="#e67e22"/>
+        </symbol>
+    </svg>
+
     <!-- TICKER -->
     <div class="repeating-bg-text border-b-4 border-brand-gray flex">
         <span>KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • KETCHUP • YELLOW MUSTARD • MAYONAISE • BROWN MUSTARD • STEAK SAUCE • RANCH DRESSING • SEASONING SALT • EXTRA VIRGIN OLIVE OIL • SALT • PEPPER • BARBEQUE SAUCE • HOT SAUCE • </span>
@@ -175,16 +251,18 @@
 
     <!-- INTRO -->
     <section class="py-4 bg-white text-center px-6">
-        <h2 class="text-2xl md:text-4xl font-extrabold text-brand-black uppercase tracking-wide mb-3">Choose Your Delivery Size</h2>
+        <h2 class="text-2xl md:text-4xl font-extrabold text-brand-black uppercase tracking-wide mb-3">Choose Your Size &amp; Quantity</h2>
         <p class="text-base text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed">
-            Order in pre-packed deliveries — each option below is priced per full delivery. Need more? <strong class="text-brand-black">Adjust the quantity at checkout</strong> to add additional deliveries.
+            Grab a <strong class="text-brand-black">single box</strong> to try it out, or buy a pre-packed delivery and <strong class="text-brand-black">save more per box</strong>. Need even more? Adjust the quantity at checkout to add additional deliveries.
         </p>
         <div class="mt-5 inline-block bg-brand-black text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded">
             Over <span class="text-brand-red">$60 in value</span> per box — all America's favorite brands
         </div>
     </section>
 
-    <!-- SMALL CONDIMENT BOX -->
+    <!-- ============================================================= -->
+    <!-- SMALL CONDIMENT BOX                                            -->
+    <!-- ============================================================= -->
     <section class="pt-16 pb-4 bg-white">
         <div class="product-section">
             <div class="product-section-header">
@@ -192,13 +270,57 @@
                 <span class="font-script text-brand-red text-3xl -mt-1">deliveries</span>
             </div>
             <p class="text-sm text-gray-500 font-medium mb-8 -mt-2">
-                All 12 must-have condiments in travel-friendly sizes. Choose a delivery size — order multiple deliveries at checkout.
+                All 12 must-have condiments in travel-friendly sizes. Buy one, or save per box with a full delivery.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Small Single Box -->
+                <div class="option-card">
+                    <div class="box-image">
+                        <svg viewBox="0 0 300 210" class="box-svg" role="img" aria-label="Small Vacation Condiment Essentials box"><use href="#boxSmall"/></svg>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <p class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-1">Small Box</p>
+                                <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">Single<br>Box</h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$8.50</div>
+                                <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per box</div>
+                            </div>
+                        </div>
+                        <div class="w-10 h-0.5 bg-brand-red mb-4"></div>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-4">
+                            One small condiment box with all the essentials — perfect for trying it out or stocking a single stay. No commitment.
+                        </p>
+                        <div class="bg-gray-50 rounded-lg p-4 mb-5">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-bold text-brand-black">1 box</span>
+                                <span class="font-bold text-brand-black">$8.50</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Price per box</span>
+                                <span class="font-bold">$8.50 / box</span>
+                            </div>
+                            <div class="border-t border-gray-200 mt-3 pt-3 text-xs text-gray-400 italic">
+                                Want more? Adjust quantity at checkout, or choose a delivery below to save per box.
+                            </div>
+                        </div>
+                        <a href="https://buy.stripe.com/aFa14mckUbeLdFq9Gmao80c"
+                           target="_blank" rel="noopener"
+                           class="mt-auto bg-brand-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded shadow transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest text-center">
+                            Order Single Box →
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Small 12-Pack -->
                 <div class="option-card">
+                    <div class="box-image">
+                        <svg viewBox="0 0 300 210" class="box-svg" role="img" aria-label="Small Vacation Condiment Essentials box"><use href="#boxSmall"/></svg>
+                    </div>
                     <div class="p-6 flex flex-col flex-1">
                         <div class="flex items-start justify-between mb-4">
                             <div>
@@ -206,7 +328,7 @@
                                 <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">12-Box<br>Delivery</h3>
                             </div>
                             <div class="text-right">
-                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$102</div>
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$96</div>
                                 <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
                             </div>
                         </div>
@@ -217,11 +339,15 @@
                         <div class="bg-gray-50 rounded-lg p-4 mb-5">
                             <div class="flex justify-between text-sm mb-1">
                                 <span class="font-bold text-brand-black">12 boxes</span>
-                                <span class="font-bold text-brand-black">$102.00</span>
+                                <span class="font-bold text-brand-black">$96.00</span>
                             </div>
                             <div class="flex justify-between text-xs text-gray-400">
                                 <span>Price per box</span>
-                                <span class="font-bold">$8.50 / box</span>
+                                <span class="font-bold">$8.00 / box</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>vs. single-box rate ($8.50)</span>
+                                <span class="font-bold text-brand-red">Save $0.50/box</span>
                             </div>
                             <div class="border-t border-gray-200 mt-3 pt-3 text-xs text-gray-400 italic">
                                 Ordering more? Adjust quantity at checkout — each additional delivery adds 12 boxes.
@@ -238,7 +364,10 @@
                 <!-- Small 27-Pack — Best Value -->
                 <div class="option-card best-value">
                     <div class="bg-brand-red text-white text-center py-2 px-4">
-                        <span class="text-xs font-black tracking-widest uppercase">★ Best Value — Save $1.08 per Box</span>
+                        <span class="text-xs font-black tracking-widest uppercase">★ Best Value — Save $1.00 per Box</span>
+                    </div>
+                    <div class="box-image">
+                        <svg viewBox="0 0 300 210" class="box-svg" role="img" aria-label="Small Vacation Condiment Essentials box"><use href="#boxSmall"/></svg>
                     </div>
                     <div class="p-6 flex flex-col flex-1">
                         <div class="flex items-start justify-between mb-4">
@@ -247,7 +376,7 @@
                                 <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">27-Box<br>Delivery</h3>
                             </div>
                             <div class="text-right">
-                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$218.70</div>
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$202.50</div>
                                 <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
                             </div>
                         </div>
@@ -258,15 +387,15 @@
                         <div class="bg-red-50 border border-red-100 rounded-lg p-4 mb-5">
                             <div class="flex justify-between text-sm mb-1">
                                 <span class="font-bold text-brand-black">27 boxes</span>
-                                <span class="font-bold text-brand-black">$218.70</span>
+                                <span class="font-bold text-brand-black">$202.50</span>
                             </div>
                             <div class="flex justify-between text-xs text-gray-500">
                                 <span>Price per box</span>
-                                <span class="font-bold text-brand-red">$8.10 / box</span>
+                                <span class="font-bold text-brand-red">$7.50 / box</span>
                             </div>
                             <div class="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>vs. 12-box rate ($8.50)</span>
-                                <span class="font-bold text-brand-red">Save $0.40/box</span>
+                                <span>vs. single-box rate ($8.50)</span>
+                                <span class="font-bold text-brand-red">Save $1.00/box</span>
                             </div>
                             <div class="border-t border-red-100 mt-3 pt-3 text-xs text-gray-400 italic">
                                 Ordering more? Adjust quantity at checkout — each additional delivery adds 27 boxes.
@@ -284,7 +413,9 @@
         </div>
     </section>
 
-    <!-- LARGE CONDIMENT BOX -->
+    <!-- ============================================================= -->
+    <!-- LARGE CONDIMENT BOX                                            -->
+    <!-- ============================================================= -->
     <section class="pt-8 pb-16 bg-white">
         <div class="product-section">
             <div class="product-section-header">
@@ -292,13 +423,57 @@
                 <span class="font-script text-brand-red text-3xl -mt-1">deliveries</span>
             </div>
             <p class="text-sm text-gray-500 font-medium mb-8 -mt-2">
-                Same great brands, larger sizes — built for extended stays and high-turnover properties. Choose a delivery size — order multiple deliveries at checkout.
+                Same great brands, larger sizes — built for extended stays and high-turnover properties. Buy one, or save per box with a full delivery.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Large Single Box -->
+                <div class="option-card">
+                    <div class="box-image">
+                        <svg viewBox="0 0 300 230" class="box-svg" role="img" aria-label="Large Vacation Condiment Essentials box"><use href="#boxLarge"/></svg>
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <p class="text-xs font-bold tracking-widest uppercase text-gray-400 mb-1">Large Box</p>
+                                <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">Single<br>Box</h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$16</div>
+                                <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per box</div>
+                            </div>
+                        </div>
+                        <div class="w-10 h-0.5 bg-brand-red mb-4"></div>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-4">
+                            One large condiment box with bigger sizes of every essential — great for a longer stay or trying the large box before ordering in bulk.
+                        </p>
+                        <div class="bg-gray-50 rounded-lg p-4 mb-5">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-bold text-brand-black">1 box</span>
+                                <span class="font-bold text-brand-black">$16.00</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Price per box</span>
+                                <span class="font-bold">$16.00 / box</span>
+                            </div>
+                            <div class="border-t border-gray-200 mt-3 pt-3 text-xs text-gray-400 italic">
+                                Want more? Adjust quantity at checkout, or choose a delivery below to save per box.
+                            </div>
+                        </div>
+                        <a href="https://buy.stripe.com/00w00i5Wwgz50SEg4Kao80d"
+                           target="_blank" rel="noopener"
+                           class="mt-auto bg-brand-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded shadow transition transform hover:-translate-y-0.5 text-xs uppercase tracking-widest text-center">
+                            Order Single Box →
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Large 12-Pack -->
                 <div class="option-card">
+                    <div class="box-image">
+                        <svg viewBox="0 0 300 230" class="box-svg" role="img" aria-label="Large Vacation Condiment Essentials box"><use href="#boxLarge"/></svg>
+                    </div>
                     <div class="p-6 flex flex-col flex-1">
                         <div class="flex items-start justify-between mb-4">
                             <div>
@@ -306,7 +481,7 @@
                                 <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">12-Box<br>Delivery</h3>
                             </div>
                             <div class="text-right">
-                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$199.20</div>
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$180</div>
                                 <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
                             </div>
                         </div>
@@ -317,11 +492,15 @@
                         <div class="bg-gray-50 rounded-lg p-4 mb-5">
                             <div class="flex justify-between text-sm mb-1">
                                 <span class="font-bold text-brand-black">12 boxes</span>
-                                <span class="font-bold text-brand-black">$199.20</span>
+                                <span class="font-bold text-brand-black">$180.00</span>
                             </div>
                             <div class="flex justify-between text-xs text-gray-400">
                                 <span>Price per box</span>
-                                <span class="font-bold">$16.60 / box</span>
+                                <span class="font-bold">$15.00 / box</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400 mt-1">
+                                <span>vs. single-box rate ($16.00)</span>
+                                <span class="font-bold text-brand-red">Save $1.00/box</span>
                             </div>
                             <div class="border-t border-gray-200 mt-3 pt-3 text-xs text-gray-400 italic">
                                 Ordering more? Adjust quantity at checkout — each additional delivery adds 12 boxes.
@@ -338,7 +517,10 @@
                 <!-- Large 18-Pack — Best Value -->
                 <div class="option-card best-value">
                     <div class="bg-brand-red text-white text-center py-2 px-4">
-                        <span class="text-xs font-black tracking-widest uppercase">★ Best Value — Save $1.10 per Box</span>
+                        <span class="text-xs font-black tracking-widest uppercase">★ Best Value — Save $1.75 per Box</span>
+                    </div>
+                    <div class="box-image">
+                        <svg viewBox="0 0 300 230" class="box-svg" role="img" aria-label="Large Vacation Condiment Essentials box"><use href="#boxLarge"/></svg>
                     </div>
                     <div class="p-6 flex flex-col flex-1">
                         <div class="flex items-start justify-between mb-4">
@@ -347,7 +529,7 @@
                                 <h3 class="font-serif text-3xl font-black text-brand-black leading-tight">18-Box<br>Delivery</h3>
                             </div>
                             <div class="text-right">
-                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$279</div>
+                                <div class="font-serif font-black text-4xl text-brand-black leading-none">$256.50</div>
                                 <div class="text-xs text-gray-400 font-bold mt-1 uppercase tracking-wide">per delivery</div>
                             </div>
                         </div>
@@ -358,15 +540,15 @@
                         <div class="bg-red-50 border border-red-100 rounded-lg p-4 mb-5">
                             <div class="flex justify-between text-sm mb-1">
                                 <span class="font-bold text-brand-black">18 boxes</span>
-                                <span class="font-bold text-brand-black">$279.00</span>
+                                <span class="font-bold text-brand-black">$256.50</span>
                             </div>
                             <div class="flex justify-between text-xs text-gray-500">
                                 <span>Price per box</span>
-                                <span class="font-bold text-brand-red">$15.50 / box</span>
+                                <span class="font-bold text-brand-red">$14.25 / box</span>
                             </div>
                             <div class="flex justify-between text-xs text-gray-400 mt-1">
-                                <span>vs. 12-box rate ($16.60)</span>
-                                <span class="font-bold text-brand-red">Save $1.10/box</span>
+                                <span>vs. single-box rate ($16.00)</span>
+                                <span class="font-bold text-brand-red">Save $1.75/box</span>
                             </div>
                             <div class="border-t border-red-100 mt-3 pt-3 text-xs text-gray-400 italic">
                                 Ordering more? Adjust quantity at checkout — each additional delivery adds 18 boxes.
@@ -432,22 +614,30 @@
                 </h3>
             </div>
             <!-- Quick order links -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+                <a href="https://buy.stripe.com/aFa14mckUbeLdFq9Gmao80c" target="_blank" rel="noopener"
+                   class="bg-white text-brand-black hover:bg-gray-100 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
+                    Small<br><span class="text-brand-red">Single — $8.50</span>
+                </a>
                 <a href="https://buy.stripe.com/eVq8wOckUciP44QdWCao808" target="_blank" rel="noopener"
                    class="bg-white text-brand-black hover:bg-gray-100 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
-                    Small<br><span class="text-brand-red">12-Box — $102</span>
+                    Small<br><span class="text-brand-red">12-Box — $96</span>
                 </a>
                 <a href="https://buy.stripe.com/9B6eVcbgQaaHate8Ciao809" target="_blank" rel="noopener"
                    class="bg-brand-black text-white hover:bg-gray-900 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
-                    Small<br><span class="text-brand-red">27-Box — $218.70</span>
+                    Small<br><span class="text-brand-red">27-Box — $202.50</span>
+                </a>
+                <a href="https://buy.stripe.com/00w00i5Wwgz50SEg4Kao80d" target="_blank" rel="noopener"
+                   class="bg-white text-brand-black hover:bg-gray-100 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
+                    Large<br><span class="text-brand-red">Single — $16</span>
                 </a>
                 <a href="https://buy.stripe.com/aFa3cu1Gg82zate5q6ao80a" target="_blank" rel="noopener"
                    class="bg-white text-brand-black hover:bg-gray-100 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
-                    Large<br><span class="text-brand-red">12-Box — $199.20</span>
+                    Large<br><span class="text-brand-red">12-Box — $180</span>
                 </a>
                 <a href="https://buy.stripe.com/5kQfZgbgQ1Eb8l6bOuao80b" target="_blank" rel="noopener"
                    class="bg-brand-black text-white hover:bg-gray-900 font-bold py-3 px-4 rounded shadow transition text-xs uppercase tracking-wide text-center">
-                    Large<br><span class="text-brand-red">18-Box — $279</span>
+                    Large<br><span class="text-brand-red">18-Box — $256.50</span>
                 </a>
             </div>
         </div>
